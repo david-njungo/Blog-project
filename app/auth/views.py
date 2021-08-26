@@ -18,7 +18,7 @@ from ..models import User,Post
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# @auth.before_first_request
+@auth.before_app_first_request
 def create_tables():
     db.create_all()
 
@@ -38,7 +38,7 @@ def login():
             
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('auth.blogs'))
+                return redirect(url_for('auth.posts'))
         print('Invalid username or password')
         return redirect(url_for('login'))
 
@@ -57,16 +57,14 @@ def register():
         email = form.email.data
         password = form.password.data
 
-        # hash the password
         hashed_password = generate_password_hash(password, method="sha256")
 
         new_user = User(first_name=first_name, last_name=last_name, 
                         username=username, email=email, password=hashed_password)
 
-        # send the data to a db
         db.session.add(new_user)
         db.session.commit()
-        print("User added successfully")
+        
         return redirect(url_for('auth.login'))
 
     return render_template('auth/register.html', form=form)

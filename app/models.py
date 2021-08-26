@@ -31,8 +31,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
     def __repr__(self):
         return f'User {self.username}'
-from app import db
-from datetime import datetime
+
 
 class Post(db.Model):
     __tablename__= "posts"
@@ -40,4 +39,3 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
     description = db.Column(db.String(), nullable=False)
     author = db.Column(db.String(), nullable=False)
-    created_at = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
