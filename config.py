@@ -2,7 +2,7 @@ import secrets
 import os
 
 class Config:
-    FLASK_APP = os.environ.get('FLASK_APP')
+    FLASK_APP = 'FLASK_APP'
     SQLACHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_hex()
 
