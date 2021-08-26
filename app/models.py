@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(), nullable=False)
     password_hash = db.Column(db.String(255))
+    comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     @property
     def password(self):

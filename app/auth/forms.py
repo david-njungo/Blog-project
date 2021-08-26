@@ -28,3 +28,7 @@ class PostForm(FlaskForm):
     author = StringField('Author Name', validators=[InputRequired(), Length(min=4, max=15)])
     description = StringField('First Name', validators=[InputRequired(), Length(min=4, max=200)])
     submit = SubmitField('Submit Blog')
+
+class CommentForm(FlaskForm):
+body = StringField('', validators=[DataRequired()])
+submit = SubmitField('Submit')
