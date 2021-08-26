@@ -15,8 +15,8 @@ class DevConfig(Config):
     FLASK_ENV ="FLASK_ENV"
     DATABASE = "blogdb"
     POSTGRES_USER = os.environ.get("moringa")
-    POSTGRES_PASSWORD = os.environ.get("456789")
-    SQLALCHEMY_DATABASE_URI ="postgresql+psycopg2://moringa:456789@localhost/blogdb"
+    POSTGRES_PASSWORD = os.environ.get("1234")
+    SQLALCHEMY_DATABASE_URI ="postgresql+psycopg2://moringa:1234@localhost/blogdb"
 
 class ProdConfig(Config):
     DATABASE = ""

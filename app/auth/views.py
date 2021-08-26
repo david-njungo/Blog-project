@@ -1,6 +1,6 @@
 from flask import render_template,redirect,url_for,flash
 from . import auth
-from .forms import LoginForm,RegistrationForm
+from .forms import LoginForm,RegistrationForm,PostForm
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
@@ -13,7 +13,7 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 
 # import models
-from ..models import User
+from ..models import User,Post
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -73,7 +73,6 @@ def register():
 
 
 @auth.route('/posts', methods = ['GET', 'POST'])
-@login_required
 def posts():
     posts = Post.query.all()
 
