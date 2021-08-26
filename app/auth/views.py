@@ -70,3 +70,24 @@ def register():
         return redirect(url_for('auth.login'))
 
     return render_template('auth/register.html', form=form)
+
+
+@auth.route('/posts', methods = ['GET', 'POST'])
+@login_required
+def posts():
+    posts = Post.query.all()
+
+    form = PostForm()
+
+    if form.validate_on_submit():
+        author = form.author.data
+        description = form.description.data
+    
+        post = Post(author = author, description = description)
+
+        db.session.add(post)
+        db.session.commit()
+
+        return redirect(url_for('posts'))
+
+    return render_template('posts.html', form=form, name=current_user.username, posts=posts)
