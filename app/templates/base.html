@@ -23,8 +23,8 @@
             </button>           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">                   
-                    <a href=""><button class="btn btn-primary me-2">Sign in</button></a>
-                    <a href=""><button class="btn btn-primary">Log in</button></a>
+                    <a href="{{ url_for('auth.register') }}"><button class="btn btn-primary me-2">Sign in</button></a>
+                    <a href="{{url_for('login')}}"><button class="btn btn-primary">Log in</button></a>
                 </ul>
             </div>
         </div>

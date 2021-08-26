@@ -6,24 +6,19 @@ from flask_login import login_user,logout_user,login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
 
-
-
-
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.before_first_request
+@auth.before_first_request
 def create_tables():
     db.create_all()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @auth.route('/')
+# def index():
+#     return render_template('index.html')
 
-@app.route('/login', methods = ['GET', 'POST'])
+@auth.route('/login', methods = ['GET', 'POST'])
 def login():
 
     form = LoginForm()
@@ -36,13 +31,13 @@ def login():
             # check the password
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('blogs'))
+                return redirect(url_for('auth.blogs'))
         print('Invalid username or password')
         # return redirect(url_for('login'))
 
     return render_template('login.html', form=form)
 
-@app.route('/signup', methods =  ['GET', 'POST'])
+@auth.route('/register', methods =  ['GET', 'POST'])
 def signup():
 
     form = SignUpForm()
@@ -65,6 +60,6 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         print("User added successfully")
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
-    return render_template('signup.html', form=form)
+    return render_template('register.html', form=form)
