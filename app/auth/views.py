@@ -68,8 +68,15 @@ def posts():
     posts = Post.query.all()
 
     form = PostForm()
-
+    form = CommentForm()
     if form.validate_on_submit():
+    comment = Comment(body=form.body.data,
+    post=post,
+    author=current_user._get_current_object())
+    db.session.add(comment)
+    db.session.commit()
+    flash('Your comment has been published.')
+    return redirect(url_for('.post', id=post.id, page=-1))
         author = form.author.data
         description = form.description.data
     
