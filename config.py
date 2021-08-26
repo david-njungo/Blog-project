@@ -5,7 +5,7 @@ class Config:
     FLASK_APP = 'FLASK_APP'
     SQLACHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_hex()
-    BLOG_API = 'http://quotes.stormconsultancy.co.uk/random.json
+    BLOG_API = 'http://quotes.stormconsultancy.co.uk/quotes/{}'
 
 class DevConfig(Config):
     MAIL_SERVER = 'smtp.googlemail.com'

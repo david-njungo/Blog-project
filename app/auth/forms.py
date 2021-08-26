@@ -17,6 +17,13 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired(), Length(min=5, max=80)])
     submit = SubmitField('Register')
 
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('Email already registered.')
+    def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first():
+            raise ValidationError('Username already in use.')
+
 class PostForm(FlaskForm):
     author = StringField('Author Name', validators=[InputRequired(), Length(min=4, max=15)])
     description = StringField('First Name', validators=[InputRequired(), Length(min=4, max=200)])
