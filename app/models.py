@@ -41,7 +41,6 @@ class Post(db.Model):
     author = db.Column(db.String(), nullable=False)
 
 class Quote:
-
     def __init__(self,id,quote):
         self.id = id
         self.quote = quote

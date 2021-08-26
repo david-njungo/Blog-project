@@ -21,4 +21,25 @@ def get_quotes(id):
 
         if get_quotes_response['quotes']:
             quotes_list = get_quotes_response['quotes']
-            quotes = process_quotes(quotes_list)
+            quotes = process_quotes(quote_list)
+
+def process_quotes(quote_list):
+    '''
+    Function  that processes the news result and transform them to a list of Objects
+
+    Args:
+        quotes_list: A list of dictionaries that contain source details
+
+    Returns :
+       quotes: A list of source objects
+    '''
+    quotes = []
+    for quote_item in quote_list:
+        id = quote_item.get('id')
+        quote = quote_item.get('quote')
+        
+        if quote:
+            quote_object = Quote(id,quote)
+            quotes.append(quote_object)
+
+    return quotes
