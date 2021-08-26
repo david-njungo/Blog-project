@@ -16,3 +16,8 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[InputRequired(), Email(message="Invalid email"), Length(max=50)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=5, max=80)])
     submit = SubmitField('Register')
+
+class BlogForm(FlaskForm):
+    author = StringField('Author Name', validators=[InputRequired(), Length(min=4, max=15)])
+    description = StringField('First Name', validators=[InputRequired(), Length(min=4, max=200)])
+    submit = SubmitField('Submit Blog')
