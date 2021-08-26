@@ -19,8 +19,8 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # @auth.before_first_request
-# def create_tables():
-#     db.create_all()
+def create_tables():
+    db.create_all()
 
 @auth.route('/')
 def index():
@@ -31,17 +31,16 @@ def login():
 
     form = LoginForm()
 
-    # check for validation
     if form.validate_on_submit():
         user = User.query.filter_by(username = form.username.data).first()
 
         if user:
-            # check the password
+            
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('auth.blogs'))
         print('Invalid username or password')
-        # return redirect(url_for('login'))
+        return redirect(url_for('login'))
 
     return render_template('login.html', form=form)
 
