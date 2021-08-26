@@ -17,7 +17,7 @@ $ git clone https://github.com/david-njungo/Blog-project.git
 ```
 * Open  the project on VS Code/ your editor of choice
 ## Live Demo
-open the project at 
+open the project at https://blogapp21.herokuapp.com
 ## Known Bugs
 No known bugs yet.
 ## Technologies Used
