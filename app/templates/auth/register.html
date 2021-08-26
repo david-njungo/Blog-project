@@ -1,53 +1,23 @@
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
 
+{% block content %}
 <div class="container-fluid">
-    <h1 class="fw-bold text-primary pt-3 pb-3 display-5"><u>Register Here</u></h1>
-    <p class="display-6 fw-bold">Fill in The Required fields below</p>
-    <form class="d-flex flex-column justify-content-center align-items-center" action="/signup" method="post">
-        {{form.hidden_tag()}}
-        <div class="mb-2">
-            <div class="fw-bold text-capitalize mb-2">
-                {{form.first_name.label}}
-            </div>
-            <div>
-                {{form.first_name(size=30, class_="form-control" )}}
-            </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1 class="fw-bold text-primary pt-3 pb-3 display-6 justify-content-center align-items-center"><u>Register Here</u></h1>
+            <p class="display-6 fw-light justify-content-center align-items-center">Fill in The Required fields below</p>
+            <form class="d-flex fw-bold flex-column justify-content-center align-items-center" action="/register" method="post">
+                <div>
+                    {{ wtf.quick_form(form) }}
+                    <input class="register-ghost-button" type="submit" value="Create an account">
+                </div>           
         </div>
-        <div class="mb-2">
-            <div class="fw-bold text-capitalize mb-2">
-                {{form.last_name.label}}
-            </div>
-            <div>
-                {{form.last_name(size=30, class_="form-control" )}}
-            </div>
-        </div>
-        <div class="mb-2">
-            <div class="fw-bold text-capitalize mb-2">
-                {{form.username.label}}
-            </div>
-            <div>
-                {{form.username(size=30, class_="form-control" )}}
-            </div>
-        </div>
-        <div class="mb-2">
-            <div class="fw-bold text-capitalize mb-2">
-                {{form.email.label}}
-            </div>
-            <div>
-                {{form.email(size=30, class_="form-control" )}}
-            </div>
-        </div>
-        <div class="mt-2">
-            <div class="fw-bold text-capitalize mb-2">
-                {{form.password.label}}
-            </div>
-            <div>
-                {{form.password(size=30, class_="form-control")}}
-            </div>
-        </div>
-        <div>
-            <input class="signup-ghost-button" type="submit" value="Create an account">
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+<div class="col-3"></div>
+</div>
+
+{% endblock %}

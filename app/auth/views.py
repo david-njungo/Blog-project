@@ -1,22 +1,30 @@
 from flask import render_template,redirect,url_for,flash
 from . import auth
-from ..models import User
 from .forms import LoginForm,RegistrationForm
-from flask_login import login_user,logout_user,login_required
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
 
+from .forms import LoginForm, RegistrationForm
+
+# creating an auth instance
+login_manager = LoginManager()
+# login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+# import models
+from ..models import User
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@auth.before_first_request
-def create_tables():
-    db.create_all()
+# @auth.before_first_request
+# def create_tables():
+#     db.create_all()
 
-# @auth.route('/')
-# def index():
-#     return render_template('index.html')
+@auth.route('/')
+def index():
+    return render_template('index.html')
 
 @auth.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -38,9 +46,9 @@ def login():
     return render_template('login.html', form=form)
 
 @auth.route('/register', methods =  ['GET', 'POST'])
-def signup():
+def register():
 
-    form = SignUpForm()
+    form = RegistrationForm()
 
     # get the data
     if form.validate_on_submit():
@@ -62,4 +70,4 @@ def signup():
         print("User added successfully")
         return redirect(url_for('auth.login'))
 
-    return render_template('register.html', form=form)
+    return render_template('auth/register.html', form=form)
