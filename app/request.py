@@ -11,7 +11,7 @@ def get_quotes(id):
     '''
     Function that gets the json response to our url request
     '''
-    get_quotes_url = base_url.format('9')
+    get_quotes_url = base_url
 
     with urllib.request.urlopen(get_quotes_url) as url:
         get_quotes_data = url.read()
@@ -21,4 +21,4 @@ def get_quotes(id):
 
         if get_quotes_response['quotes']:
             quotes_list = get_quotes_response['quotes']
-            quotes = process_sources(quotes_list)
+            quotes = process_quotes(quotes_list)
